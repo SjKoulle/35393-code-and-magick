@@ -9,7 +9,7 @@ var FONT_GAP = 20;
 var BOTTOM_FONT_Y = 265;
 var BAR_WIDTH = 40;
 var BAR_GAP = 50;
-var barMaxHeight = 150;
+var BAR_MAX_HEIGHT = 150;
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -25,8 +25,8 @@ var getMaxElement = function (arr) {
         maxElement = Math.ceil(arr[i]);
       }
     }
-    return maxElement;
   }
+  return maxElement;
 };
 
 var getRandomBlue = function () {
@@ -48,13 +48,12 @@ window.renderStatistics = function (ctx, players, times) {
   for (var i = 0; i < players.length; i++) {
     ctx.fillStyle = '#000';
     ctx.fillText(players[i], CLOUD_X + GAP * 2 + (BAR_WIDTH + BAR_GAP) * i, BOTTOM_FONT_Y);
-    ctx.fillText(Math.ceil(times[i]), CLOUD_X + GAP * 2 + (BAR_WIDTH + BAR_GAP) * i, (CLOUD_Y + GAP + FONT_GAP * 3) + 150 - (barMaxHeight * times[i]) / maxTime - GAP);
+    ctx.fillText(Math.ceil(times[i]), CLOUD_X + GAP * 2 + (BAR_WIDTH + BAR_GAP) * i, (CLOUD_Y + GAP + FONT_GAP * 3) + (BAR_MAX_HEIGHT + GAP) - (BAR_MAX_HEIGHT * times[i]) / maxTime - GAP);
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-      ctx.fillRect(CLOUD_X + GAP * 2 + (BAR_WIDTH + BAR_GAP) * i, (CLOUD_Y + GAP + FONT_GAP * 3) + 150 - (barMaxHeight * times[i]) / maxTime, BAR_WIDTH, (barMaxHeight * times[i]) / maxTime);
     } else {
       ctx.fillStyle = getRandomBlue();
-      ctx.fillRect(CLOUD_X + GAP * 2 + (BAR_WIDTH + BAR_GAP) * i, (CLOUD_Y + GAP + FONT_GAP * 3) + 150 - (barMaxHeight * times[i]) / maxTime, BAR_WIDTH, (barMaxHeight * times[i]) / maxTime);
     }
+    ctx.fillRect(CLOUD_X + GAP * 2 + (BAR_WIDTH + BAR_GAP) * i, (CLOUD_Y + GAP + FONT_GAP * 3) + (BAR_MAX_HEIGHT + GAP) - (BAR_MAX_HEIGHT * times[i]) / maxTime, BAR_WIDTH, (BAR_MAX_HEIGHT * times[i]) / maxTime);
   }
 };
